@@ -23,12 +23,14 @@ import ebay.api.paypalapi.ManagePendingTransactionStatusResponseType;
 import ebay.api.paypalapi.MassPayRequestItemType;
 import ebay.api.paypalapi.MassPayResponseType;
 import ebay.api.paypalapi.RefundTransactionResponseType;
+import ebay.api.paypalapi.TransactionSearchRequestType;
 import ebay.apis.corecomponenttypes.BasicAmountType;
 import ebay.apis.eblbasecomponents.CompleteCodeType;
 import ebay.apis.eblbasecomponents.CreditCardDetailsType;
 import ebay.apis.eblbasecomponents.FMFPendingTransactionActionType;
 import ebay.apis.eblbasecomponents.PaymentActionCodeType;
 import ebay.apis.eblbasecomponents.PaymentDetailsType;
+import ebay.apis.eblbasecomponents.PaymentTransactionSearchResultType;
 import ebay.apis.eblbasecomponents.ReceiverInfoCodeType;
 import ebay.apis.eblbasecomponents.RefundType;
 import ebay.apis.eblbasecomponents.TransactionEntityType;
@@ -70,6 +72,8 @@ public interface PaypalFacade
     DoDirectPaymentResponseType doDirectPayment(String ipAddress, CreditCardDetailsType cardDetails, 
                                   PaymentDetailsType paymentDetails, PaymentActionCodeType paymentAction, 
                                   Integer setReturnFMFDetails);
+
+    List<PaymentTransactionSearchResultType> transactionSearch(TransactionSearchRequestType transactionSearchRequestType);
 }
 
 

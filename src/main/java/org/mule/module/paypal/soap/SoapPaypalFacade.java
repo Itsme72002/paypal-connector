@@ -64,6 +64,8 @@ import ebay.api.paypalapi.PayPalAPIInterface;
 import ebay.api.paypalapi.RefundTransactionReq;
 import ebay.api.paypalapi.RefundTransactionRequestType;
 import ebay.api.paypalapi.RefundTransactionResponseType;
+import ebay.api.paypalapi.TransactionSearchReq;
+import ebay.api.paypalapi.TransactionSearchRequestType;
 import ebay.apis.corecomponenttypes.BasicAmountType;
 import ebay.apis.eblbasecomponents.AbstractResponseType;
 import ebay.apis.eblbasecomponents.AckCodeType;
@@ -74,6 +76,7 @@ import ebay.apis.eblbasecomponents.DoDirectPaymentRequestDetailsType;
 import ebay.apis.eblbasecomponents.FMFPendingTransactionActionType;
 import ebay.apis.eblbasecomponents.PaymentActionCodeType;
 import ebay.apis.eblbasecomponents.PaymentDetailsType;
+import ebay.apis.eblbasecomponents.PaymentTransactionSearchResultType;
 import ebay.apis.eblbasecomponents.ReceiverInfoCodeType;
 import ebay.apis.eblbasecomponents.RefundType;
 import ebay.apis.eblbasecomponents.TransactionEntityType;
@@ -327,6 +330,14 @@ public class SoapPaypalFacade implements PaypalFacade
         handleError(ret);
         
         return ret;
+    }
+    
+    public List<PaymentTransactionSearchResultType> transactionSearch(final TransactionSearchRequestType transactionSearchRequestType)
+    {
+        Validate.notNull(transactionSearchRequestType);
+        transactionSearchRequestType.setVersion(apiVersion);
+        final TransactionSearchReq payload = new TransactionSearchReq(transactionSearchRequestType);
+        return getApi().transactionSearch(payload).getPaymentTransactions();
     }
     
     public ManagePendingTransactionStatusResponseType managePendingTransactionStatus(

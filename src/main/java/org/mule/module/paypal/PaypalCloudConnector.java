@@ -42,11 +42,13 @@ import ebay.api.paypalapi.ManagePendingTransactionStatusResponseType;
 import ebay.api.paypalapi.MassPayRequestItemType;
 import ebay.api.paypalapi.MassPayResponseType;
 import ebay.api.paypalapi.RefundTransactionResponseType;
+import ebay.api.paypalapi.TransactionSearchRequestType;
 import ebay.apis.corecomponenttypes.BasicAmountType;
 import ebay.apis.eblbasecomponents.CompleteCodeType;
 import ebay.apis.eblbasecomponents.CreditCardDetailsType;
 import ebay.apis.eblbasecomponents.CurrencyCodeType;
 import ebay.apis.eblbasecomponents.PaymentDetailsType;
+import ebay.apis.eblbasecomponents.PaymentTransactionSearchResultType;
 
 /**
  * Cloud connector for Paypal. 
@@ -335,6 +337,15 @@ public class PaypalCloudConnector
     public GetTransactionDetailsResponseType getTransactionDetails(final String transactionId)
     {
         return facade.getTransactionDetails(transactionId);
+    }
+    
+    /**
+     * Searches transactions
+     * */
+    @Processor
+    public List<PaymentTransactionSearchResultType> transactionSearch(TransactionSearchRequestType transactionSearchRequestType)
+    {
+        return facade.transactionSearch(transactionSearchRequestType);
     }
     
     /**
