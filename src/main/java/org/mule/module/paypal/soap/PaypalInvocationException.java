@@ -41,7 +41,7 @@ public class PaypalInvocationException extends RuntimeException
         for (final ErrorType error : type.getErrors())
         {
             sb.append(String.format("%s: %3s %s (#%s)", error.getSeverityCode().name(), error.getErrorCode(),
-                error.getShortMessage(), type.getCorrelationID()));
+                error.getLongMessage(), type.getCorrelationID()));
         }
         return sb.toString();
     }

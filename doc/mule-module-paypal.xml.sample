@@ -56,3 +56,9 @@
     </paypal:payment-details>
 </paypal:do-direct-payment>
 <!-- END_INCLUDE(paypal:do-direct-payment) -->
+
+<!-- BEGIN_INCLUDE(paypal:transaction-search) -->
+<paypal:transaction-search>
+
+</paypal:transaction-search>
+<!-- END_INCLUDE(paypal:transaction-search) -->

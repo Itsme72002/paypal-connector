@@ -12,12 +12,6 @@
 
 package org.mule.module.paypal;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-
-import org.apache.commons.lang.Validate;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -28,6 +22,11 @@ import org.mule.module.paypal.soap.SoapPaypalFacade;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import ebay.api.paypalapi.AddressVerifyResponseType;
 import ebay.api.paypalapi.DoAuthorizationResponseType;
@@ -49,6 +48,8 @@ import ebay.apis.eblbasecomponents.CreditCardDetailsType;
 import ebay.apis.eblbasecomponents.CurrencyCodeType;
 import ebay.apis.eblbasecomponents.PaymentDetailsType;
 import ebay.apis.eblbasecomponents.PaymentTransactionSearchResultType;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * Cloud connector for Paypal. 
@@ -340,10 +341,19 @@ public class PaypalCloudConnector
     }
     
     /**
-     * Searches transactions
-     * */
+     * Searches transaction history for transactions that meet the specified criteria.
+     * <br/>
+     * NOTE: The maximum number of transactions that can be returned from a TransactionSearch API call is 100
+     *  
+     * {@sample.xml ../../../doc/mule-module-paypal.xml.sample paypal:transaction-search}
+     *
+     * @param transactionSearchRequestType The criteria to search
+     *  
+     * @return List<PaymentTransactionSearchResultType> with the transactions searched
+     *
+     */
     @Processor
-    public List<PaymentTransactionSearchResultType> transactionSearch(TransactionSearchRequestType transactionSearchRequestType)
+    public List<PaymentTransactionSearchResultType> transactionSearch(@Optional @Default("#[payload]") ebay.api.paypalapi.TransactionSearchRequestType transactionSearchRequestType)
     {
         return facade.transactionSearch(transactionSearchRequestType);
     }

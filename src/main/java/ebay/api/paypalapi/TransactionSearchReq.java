@@ -45,6 +45,11 @@ public class TransactionSearchReq {
     @XmlElement(name = "TransactionSearchRequest", required = true)
     protected TransactionSearchRequestType transactionSearchRequest;
 
+    public TransactionSearchReq()
+    {
+        super();
+    }
+
     public TransactionSearchReq(TransactionSearchRequestType transactionSearchRequestType)
     {
         this.transactionSearchRequest = transactionSearchRequestType;
